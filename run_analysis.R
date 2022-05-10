@@ -17,13 +17,15 @@ trainactivity <- factor(trainlabel$V1, levels = 1:6, labels = activity)
 
 colnames(test) <- variablenames$V2
 colnames(train) <- variablenames$V2
+
 test <- cbind(id = testid$V1, activity = testactivity, test)
 train <- cbind(id = trainid$V1, activity = trainactivity, train)
+
 merged <- rbind(test, train)
 mymerged <- select(merged, id, activity, myvariable+2)
 
 melted <- melt(mymerged, id = c("id", "activity"), measure.vars = names(mymerged)[-c(1,2)])
 mytidydata <- dcast(melted, id + activity ~ variable, mean)
-
+mytidydata
 
 
